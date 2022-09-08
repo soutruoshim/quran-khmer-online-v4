@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:quran_khmer_online/app/setting_page/size_config.dart';
+
+class SettingsListItem extends StatelessWidget {
+  final String text;
+  final bool arrow;
+  final bool first;
+  final Color color;
+  final Function onTap;
+
+  const SettingsListItem({
+    Key key,
+    this.text,
+    this.arrow,
+    this.color,
+    this.first = false,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          !first
+              ? Divider(
+            thickness: 1,
+            color: Theme.of(context).dividerColor,
+            height: 0,
+          )
+              : Container(),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.blockSizeHorizontal * 6,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  text,
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.normal,
+                    color:Colors.black87,
+                  ),
+                ),
+                arrow
+                    ? Icon(
+                  Icons.chevron_right,
+                  size: SizeConfig.blockSizeHorizontal * 5,
+                  color: Colors.black87,
+                )
+                    : Container()
+              ],
+            ),
+          ),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3),
+        ],
+      ),
+    );
+  }
+}

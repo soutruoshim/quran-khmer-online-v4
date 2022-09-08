@@ -82,6 +82,7 @@ flutter:
     - images/bismillah.png
     - images/vector.png
     - images/empty.png
+    - images/user_icon.png
     - jsonfile/chapter_list.json
     - jsonfile/translate.json
 
