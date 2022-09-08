@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>929282153547-50po98qab2d5sj5shbf4ujuae6v4msrq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.929282153547-50po98qab2d5sj5shbf4ujuae6v4msrq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>929282153547-3nf36fq79fopvtpouackqmo368260u0j.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBzJ9aGh2uPBwlTz6TnfdS_2OaMX5sa_LI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>929282153547</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.srhdp.quranKhmerOnline</string>
+	<key>PROJECT_ID</key>
+	<string>quran-khmer-online</string>
+	<key>STORAGE_BUCKET</key>
+	<string>quran-khmer-online.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:929282153547:ios:82d6b44d0a660c09ae01ce</string>
+</dict>
+</plist>

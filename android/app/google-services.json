@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "929282153547",
+    "project_id": "quran-khmer-online",
+    "storage_bucket": "quran-khmer-online.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929282153547:android:51efb734b5aef3beae01ce",
+        "android_client_info": {
+          "package_name": "com.srhdp.quran_khmer_online"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929282153547-3nf36fq79fopvtpouackqmo368260u0j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.srhdp.quran_khmer_online",
+            "certificate_hash": "72fc507dd4f3c6d4235367a68069150ad9070647"
+          }
+        },
+        {
+          "client_id": "929282153547-5uatog58rhqvbg3luk8mhcqllck3jt9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDPQMQBy5Np0v73l_xtO5FFaWViDDfQ2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929282153547-5uatog58rhqvbg3luk8mhcqllck3jt9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
