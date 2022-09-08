@@ -14,6 +14,7 @@ class AccountListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  ListTile(
+
       // leading:
       // Container(
       //   height: 55,
@@ -35,6 +36,7 @@ class AccountListTile extends StatelessWidget {
       //     ),
       //   ),
       // ),
+      //contentPadding: EdgeInsets.all(0),
       leading: Container(
         width: 55,
         height: 55,

@@ -225,7 +225,7 @@ class _StreamsPageState extends State<StreamsPage> {
         ),
       ),
 
-      body: _buildContents(context),
+      body: _buildContents(context)
     );
   }
 

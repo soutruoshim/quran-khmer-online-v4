@@ -26,5 +26,7 @@ class SizeConfig {
     // 17 -> 4
     safeBlockHorizontal = (screenWidth - _safeAreaHorizontal) / 100;
     safeBlockVertical = (screenHeight - _safeAreaVertical) / 100;
+
+    print("block"+blockSizeHorizontal.toString());
   }
 }
