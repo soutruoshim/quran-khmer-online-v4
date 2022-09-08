@@ -188,19 +188,19 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
         appBar: AppBar(
           title: Text("Account"),
           elevation: 0.5,
-          actions: <Widget>[
-            PopupMenuButton<String>(
-              onSelected: handleClick,
-              itemBuilder: (BuildContext context) {
-                return menu.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-            ),
-          ],
+          // actions: <Widget>[
+          //   PopupMenuButton<String>(
+          //     onSelected: handleClick,
+          //     itemBuilder: (BuildContext context) {
+          //       return menu.map((String choice) {
+          //         return PopupMenuItem<String>(
+          //           value: choice,
+          //           child: Text(choice),
+          //         );
+          //       }).toList();
+          //     },
+          //   ),
+          // ],
         ),
         body: _body(context),
 
