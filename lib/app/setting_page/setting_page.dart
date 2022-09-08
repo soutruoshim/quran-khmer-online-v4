@@ -144,7 +144,7 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Account"),
+          title: Text("Settings"),
           elevation: 0.5,
         ),
         body: _body(context),
