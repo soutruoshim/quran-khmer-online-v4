@@ -60,7 +60,9 @@ class _ItemAyahState extends State<ItemAyah> {
                       SizedBox(width: 20.0),
                       GestureDetector(
                           onTap:(){
-                            Clipboard.setData(ClipboardData(text: "${widget.item.ayahText} \n ${widget.item.ayahTextKhmer}"));
+                            String vers_id = "[سورة ${widget.item.surahName}\(${widget.item.verseId}\)]";
+
+                            Clipboard.setData(ClipboardData(text: "${widget.item.ayahText} $vers_id \n ${widget.item.ayahTextKhmer}"));
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                             content: Text("Ayat copied"),
                           ));
@@ -114,9 +116,10 @@ class _ItemAyahState extends State<ItemAyah> {
     );
   }
   Future<void> share() async {
+    String vers_id = "[سورة ${widget.item.surahName}\(${widget.item.verseId}\)]";
     await FlutterShare.share(
         title: '${widget.item.surahName}',
-        text: "${widget.item.ayahText} \n ${widget.item.ayahTextKhmer}"
+        text: "${widget.item.ayahText}$vers_id \n ${widget.item.ayahTextKhmer}"
     );
   }
   Future<void> _addItem() async {

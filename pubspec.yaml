@@ -48,6 +48,7 @@ dependencies:
   universal_platform: ^1.0.0+1
   launch_review: ^3.0.1
   webview_flutter: ^3.0.4
+  connectivity_plus: ^2.3.6+1
 
 
 dev_dependencies:

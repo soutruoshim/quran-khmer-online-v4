@@ -557,8 +557,8 @@ class _AccountPageState extends State<AccountPage> with SingleTickerProviderStat
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             new Container(
-                                width: 140.0,
-                                height: 140.0,
+                                width: 120.0,
+                                height: 120.0,
                                 decoration: new BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: (_img == '')? DecorationImage(

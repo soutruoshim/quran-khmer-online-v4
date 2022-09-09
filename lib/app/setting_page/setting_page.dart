@@ -11,6 +11,7 @@ import 'package:quran_khmer_online/app/lecture_page/lectures_page.dart';
 import 'package:quran_khmer_online/app/schedule_set_page/sechedule_set_page.dart';
 import 'package:quran_khmer_online/app/setting_page/about_page.dart';
 import 'package:quran_khmer_online/app/setting_page/contact_page.dart';
+import 'package:quran_khmer_online/app/setting_page/faq_page.dart';
 import 'package:quran_khmer_online/app/setting_page/privacy_page.dart';
 import 'package:quran_khmer_online/app/setting_page/setting_list_item.dart';
 import 'package:quran_khmer_online/app/setting_page/size_config.dart';
@@ -210,7 +211,7 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return CircleAvatar(
-              backgroundImage: AssetImage('images/user_icon.png'),
+              backgroundImage: AssetImage('images/as.png'),
               backgroundColor: Colors.transparent,
               maxRadius: SizeConfig.blockSizeHorizontal * 9.5,
             );
@@ -219,13 +220,25 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
             if (userDocument != null) {
               _name = userDocument.name;
               _img = userDocument.img;
-              return CircleAvatar(
-                backgroundImage: NetworkImage(
-                  _img,
-                ),
-                backgroundColor: Colors.transparent,
-                maxRadius: SizeConfig.blockSizeHorizontal * 9.5,
-              );
+              // return CircleAvatar(
+              //   backgroundImage: NetworkImage(
+              //     _img,
+              //   ),
+              //   backgroundColor: Colors.transparent,
+              //   maxRadius: SizeConfig.blockSizeHorizontal * 9.5,
+              // );
+              return Container(
+                  width: 120.0,
+                  height: 120.0,
+                  decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: (_img == '')? DecorationImage(
+                        image: new ExactAssetImage('images/as.png'),
+                        fit: BoxFit.cover,
+                      ): new DecorationImage(
+                          image: new NetworkImage(_img),
+                          fit: BoxFit.fill)
+                  ));
             }else{
               return Center(
                 child: CircularProgressIndicator(
@@ -245,11 +258,18 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
     if (auth.currentUser == null || auth.currentUser == null) {
       return GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AccountPage()),
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => AccountPage()),
+          // );
+          Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                fullscreenDialog: true,
+                builder: (context) => AccountPage(),
+              )
           );
         },
+
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -312,7 +332,12 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
               // onTap: () => Navigator.pushNamed(
               //     context, EditProfileScreen.routeName),
               onTap:(){
-
+                Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      fullscreenDialog: true,
+                      builder: (context) => AccountPage(),
+                    )
+                );
               }
           ),
           // auth.currentUser == null || auth.currentUser == null
@@ -377,21 +402,33 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
                 text: 'About Us',
                 arrow: true,
                 first: true,
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (ctx) => AboutUsScreen(),
-                  ),
+                // onTap: () => Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (ctx) => AboutUsScreen(),
+                //   ),
+                // ),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      fullscreenDialog: true,
+                      builder: (context) => AboutUsScreen(),
+                    )
                 ),
               ),
               SettingsListItem(
                 text: 'Contact Us',
                 arrow: true,
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (ctx) => ContactPage(),
-                  ),
+                // onTap: () => Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (ctx) => ContactPage(),
+                //   ),
+                // ),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      fullscreenDialog: true,
+                      builder: (context) => ContactPage(),
+                    )
                 ),
               ),
               SettingsListItem(
@@ -400,30 +437,48 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
                 // onTap: () => Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
-                //     builder: (ctx) => InformationScreen(title: 'FAQ'),
+                //     builder: (ctx) => FaqPage(),
                 //   ),
                 // ),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      fullscreenDialog: true,
+                      builder: (context) => FaqPage(),
+                    )
+                ),
               ),
               SettingsListItem(
                 text: 'Privacy Policy',
                 arrow: true,
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (ctx) =>
-                        PrivacyPage(),
-                  ),
+                // onTap: () => Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (ctx) =>
+                //         PrivacyPage(),
+                //   ),
+                // ),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      fullscreenDialog: true,
+                      builder: (context) => PrivacyPage(),
+                    )
                 ),
               ),
               SettingsListItem(
                 text: 'Terms and Conditions',
                 arrow: true,
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (ctx) =>
-                        TermPage(),
-                  ),
+                // onTap: () => Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (ctx) =>
+                //         TermPage(),
+                //   ),
+                // ),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      fullscreenDialog: true,
+                      builder: (context) => TermPage(),
+                    )
                 ),
               ),
             ],

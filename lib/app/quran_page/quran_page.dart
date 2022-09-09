@@ -403,7 +403,8 @@ class _QuranPageState extends State<QuranPage> {
                           SizedBox(width: 20.0),
                           GestureDetector(
                               onTap:(){
-                                Clipboard.setData(ClipboardData(text: "${_bookmarkList[index]['ayahText']} \n ${_bookmarkList[index]['ayahTextKhmer']}"));
+                                String vers_id = "[سورة ${_bookmarkList[index]['surahName']}\(${_bookmarkList[index]['verseId']}\)]";
+                                Clipboard.setData(ClipboardData(text: "${_bookmarkList[index]['ayahText']}$vers_id \n ${_bookmarkList[index]['ayahTextKhmer']}"));
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   content: Text("Ayat copied."),
                                 ));
@@ -494,9 +495,10 @@ class _QuranPageState extends State<QuranPage> {
     ));
   }
   Future<void> share(item) async {
+    String vers_id = "[سورة ${item['surahName']}\(${item['verseId']}\)]";
     await FlutterShare.share(
         title: '${item['surahName']}',
-        text: "${item['ayahText']} \n ${item['ayahTextKhmer']}"
+        text: "${item['ayahText']}$vers_id \n ${item['ayahTextKhmer']}"
     );
   }
 
