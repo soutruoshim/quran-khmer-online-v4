@@ -3,14 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:provider/provider.dart';
 import 'package:quran_khmer_online/app/account_page/account_page.dart';
-import 'package:quran_khmer_online/app/landing_page.dart';
 import 'package:quran_khmer_online/app/lecture_page/lectures_page.dart';
 import 'package:quran_khmer_online/app/schedule_set_page/sechedule_set_page.dart';
+import 'package:quran_khmer_online/app/setting_page/about_page.dart';
+import 'package:quran_khmer_online/app/setting_page/contact_page.dart';
+import 'package:quran_khmer_online/app/setting_page/privacy_page.dart';
 import 'package:quran_khmer_online/app/setting_page/setting_list_item.dart';
 import 'package:quran_khmer_online/app/setting_page/size_config.dart';
+import 'package:quran_khmer_online/app/setting_page/term_page.dart';
 import 'package:quran_khmer_online/app/sign_in/sign_in_page.dart';
 import 'package:quran_khmer_online/common_widget/avatar.dart';
 import 'package:quran_khmer_online/common_widget/show_alert_dialog.dart';
@@ -18,6 +22,10 @@ import 'package:quran_khmer_online/common_widget/show_exception_alert_dialog.dar
 import 'package:quran_khmer_online/models/account.dart';
 import 'package:quran_khmer_online/services/auth.dart';
 import 'package:quran_khmer_online/services/database.dart';
+import 'package:universal_platform/universal_platform.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+enum Availability { loading, available, unavailable }
 
 class SettingPage extends StatefulWidget {
   @override
@@ -26,10 +34,9 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> with SingleTickerProviderStateMixin{
   final _formKey = GlobalKey<FormState>();
-  File _image;
+  String _appStoreId = 'id1574088938';
 
 
-  bool _status = true;
   final FocusNode myFocusNode = FocusNode();
 
   String _name     = '';
@@ -40,14 +47,19 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
   String _img      = '';
   String _online   = '';
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("init homepage");
-
   }
 
+  _rateMyApp(){
+    LaunchReview.launch(
+      androidAppId: "com.srhdp.quran_khmer_online",
+      iOSAppId: "id1574088938",
+    );
+  }
   Future<void> _signOut(BuildContext context) async{
     try{
       final auth = Provider.of<AuthBase>(context, listen: false);
@@ -127,17 +139,22 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
     print("yu");
   }
 
-  _shareApp() {
-    // try {
-    //   if (UniversalPlatform.isAndroid) {
-    //     Share.share('$SHARE_TEXT \n $ANDROID_SHARE_URL');
-    //   } else if (UniversalPlatform.isIOS) {
-    //     Share.share('$SHARE_TEXT \n $IOS_SHARE_URL');
-    //   }
-    // } catch (e) {
-    //   print(e);
-    // }
-    print("yu");
+  Future<void> _shareApp() async {
+    try {
+      if (UniversalPlatform.isAndroid) {
+        await FlutterShare.share(
+            title: 'Quran Khmer Online',
+            text: "https://play.google.com/store/apps/details?id=com.srhdp.quran_khmer_online"
+        );
+      } else if (UniversalPlatform.isIOS) {
+        await FlutterShare.share(
+            title: 'Quran Khmer Online',
+            text: "https://apps.apple.com/au/app/quran-khmer-online/id1574088938"
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -298,20 +315,20 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
 
               }
           ),
-          auth.currentUser == null || auth.currentUser == null
-              ? Container()
-              : SettingsListItem(
-              text: 'Messages',
-              arrow: true,
-              // onTap: () => Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (ctx) => ConversationsScreen()),
-              // ),
-              onTap:(){
-
-              }
-          ),
+          // auth.currentUser == null || auth.currentUser == null
+          //     ? Container()
+          //     : SettingsListItem(
+          //     text: 'Messages',
+          //     arrow: true,
+          //     // onTap: () => Navigator.push(
+          //     //   context,
+          //     //   MaterialPageRoute(
+          //     //       builder: (ctx) => ConversationsScreen()),
+          //     // ),
+          //     onTap:(){
+          //
+          //     }
+          // ),
 
           SettingsListItem(
             text: 'Share the app',
@@ -321,7 +338,7 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
           SettingsListItem(
             text: 'Rate this app',
             arrow: false,
-            onTap: () => _rateApp(),
+            onTap: () => _rateMyApp(),
           ),
         ],
       ),
@@ -360,22 +377,22 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
                 text: 'About Us',
                 arrow: true,
                 first: true,
-                // onTap: () => Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (ctx) => InformationScreen(title: 'About Us'),
-                //   ),
-                // ),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => AboutUsScreen(),
+                  ),
+                ),
               ),
               SettingsListItem(
                 text: 'Contact Us',
                 arrow: true,
-                // onTap: () => Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (ctx) => InformationScreen(title: 'Contact Us'),
-                //   ),
-                // ),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => ContactPage(),
+                  ),
+                ),
               ),
               SettingsListItem(
                 text: 'FAQ',
@@ -390,24 +407,24 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
               SettingsListItem(
                 text: 'Privacy Policy',
                 arrow: true,
-                // onTap: () => Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (ctx) =>
-                //         InformationScreen(title: 'Privacy Policy'),
-                //   ),
-                // ),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) =>
+                        PrivacyPage(),
+                  ),
+                ),
               ),
               SettingsListItem(
                 text: 'Terms and Conditions',
                 arrow: true,
-                // onTap: () => Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (ctx) =>
-                //         InformationScreen(title: 'Terms and Conditions'),
-                //   ),
-                // ),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) =>
+                        TermPage(),
+                  ),
+                ),
               ),
             ],
           ),
