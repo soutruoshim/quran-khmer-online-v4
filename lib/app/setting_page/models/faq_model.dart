@@ -19,7 +19,7 @@ List dataList = [
     "name": "Can I join stream without registration?",
     "icon": Icons.question_answer,
     "subMenu": [
-      {"name": "Yes, you can join stream without account. this mean u guest user."},
+      {"name": "Yes, you can join stream without account. this mean you are a guest."},
     ]
   },
 

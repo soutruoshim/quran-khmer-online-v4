@@ -220,6 +220,10 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
             if (userDocument != null) {
               _name = userDocument.name;
               _img = userDocument.img;
+              _role = userDocument.role;
+
+              print(userDocument.role);
+
               // return CircleAvatar(
               //   backgroundImage: NetworkImage(
               //     _img,
@@ -489,36 +493,85 @@ class _SettingPageState extends State<SettingPage> with SingleTickerProviderStat
 
   _buildLogoutAndDeleteList(BuildContext context) {
         final auth = Provider.of<AuthBase>(context, listen: false);
+        final database = Provider.of<Database>(context, listen: false);
+
         if (auth.currentUser != null && auth.currentUser != null) {
-          return Container(
-            padding: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 2),
-            child: _buttonsListContainer(
-              context,
-              Column(
-                // shrinkWrap: true,
-                // physics: NeverScrollableScrollPhysics(),
-                children: [
-                  auth.currentUser == null || auth.currentUser == null
-                      ? Container()
-                      : SettingsListItem(
-                    text: 'Logout',
-                    arrow: true,
-                    first: true,
-                    color: Theme.of(context).primaryColor,
-                    onTap: () => _confirmSignOut(context),
-                  ),
-                  auth.currentUser == null || auth.currentUser == null
-                      ? Container()
-                      : SettingsListItem(
-                    text: 'Delete Account',
-                    arrow: false,
-                    color: Colors.red,
-                    onTap: () => _confirmDeleteAccount(context),
-                  ),
-                ],
-              ),
-            ),
+          return  StreamBuilder<Account>(
+              stream: database.accountStream(accountId: auth.currentUser.uid),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  print("work");
+                  return _buttonsListContainer(
+                    context,
+                    Column(
+                      children: [
+                        auth.currentUser == null || auth.currentUser == null
+                            ? Container()
+                            : SettingsListItem(
+                          text: 'Logout',
+                          arrow: true,
+                          first: true,
+                          color: Theme.of(context).primaryColor,
+                          onTap: () => _confirmSignOut(context),
+                        ),
+                        auth.currentUser == null || auth.currentUser == null
+                            ? Container() : SettingsListItem(
+                          text: 'Delete Account',
+                          arrow: false,
+                          color: Colors.red,
+                          onTap: () => _confirmDeleteAccount(context),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  final userDocument = snapshot.data;
+                  if (userDocument != null) {
+                    _name = userDocument.name;
+                    _img = userDocument.img;
+                    _role = userDocument.role;
+                    return Container(
+                      padding: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 2),
+                      child: _buttonsListContainer(
+                        context,
+                        Column(
+                          // shrinkWrap: true,
+                          // physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            auth.currentUser == null || auth.currentUser == null
+                                ? Container()
+                                : SettingsListItem(
+                              text: 'Logout',
+                              arrow: true,
+                              first: true,
+                              color: Theme.of(context).primaryColor,
+                              onTap: () => _confirmSignOut(context),
+                            ),
+                            auth.currentUser == null || auth.currentUser == null
+                                ? Container()
+                                : _role !='teacher'?SettingsListItem(
+                              text: 'Delete Account',
+                              arrow: false,
+                              color: Colors.red,
+                              onTap: () => _confirmDeleteAccount(context),
+                            ):Container(),
+                          ],
+                        ),
+                      ),
+                    );
+                  }else{
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: null,
+                        strokeWidth: 4.0,
+                      ),
+                    );
+                  }
+                }
+              }
           );
+
+
         }
         return Container();
   }
